@@ -5,8 +5,8 @@
 class FileWorker
 {
 public:
-	vector<Member> GetMembersFromFile(string fileName);
-	void WriteMembersToFile(string fileName, vector<Member> members);
+	static vector<Member> GetMembersFromFile(string fileName);
+	static void WriteMembersToFile(string fileName, vector<Member> members);
 private:
 	FileWorker() {}
 	

@@ -1,5 +1,5 @@
 #include "Member.h"
-
+#include "FileWorker.h"
 Member::Member(string name, string sex, Date date, string city, MusicalInstrument musicalInstrument, int placeByResult)
 {
 	this->fullName = name;
@@ -12,6 +12,7 @@ Member::Member(string name, string sex, Date date, string city, MusicalInstrumen
 
 string Member::GetFullName()
 {
+	vector<Member> s = FileWorker::GetMembersFromFile("sds");
 	return fullName;
 }
 
