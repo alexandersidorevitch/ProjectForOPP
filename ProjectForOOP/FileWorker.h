@@ -1,6 +1,7 @@
 #pragma once
 #include "Member.h"
 #include <vector>
+#include <fstream>
 class FileWorker
 {
 public:

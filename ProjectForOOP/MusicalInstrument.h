@@ -5,6 +5,7 @@ class MusicalInstrument
 {
 public:
 	MusicalInstrument(string name);
+	MusicalInstrument();
 	string GetName();
 private:
 	string name;

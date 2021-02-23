@@ -17,10 +17,11 @@ public:
 	MusicalInstrument GetMusicalInstrument();
 	int GetPlaceByResults();
 private:
-	string name;
+	string fullName;
 	string sex;
 	Date date;
 	string city;
+	string phoneNumber;
 	MusicalInstrument musicalInstrument;
 	int placeByResult;
 };
