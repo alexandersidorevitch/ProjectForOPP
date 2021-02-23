@@ -1,20 +1,27 @@
 #include "Date.h"
 #include <vector>
+#include <time.h>
+#include <chrono>
+#include <iostream>
 using namespace std;
 Date::Date(int day, int month, int year)
 {
-	vector<int> dayMonthly = { 21,29,};
-	this->day = day;
-	this->month = month;
+	vector<int> dayMonthly = { 31,29,31,30,31,30,31,31,30,31,30,31};
+	this->month = (month - 1) % 12 + 1;
+	this->day = day % dayMonthly[this->month];
 	this->year = year;
 }
-
+Date::Date(int dayCount)
+{
+	Date::Date(0, 0, 0);
+	
+}
 Date::Date()
 {
 	Date::Date(0, 0, 0);
 }
 
-int Date::GetDay()
+const int Date::GetDay()
 {
 	return day;
 }
@@ -29,9 +36,9 @@ int Date::GetYear()
 	return year;
 }
 
-Date Date::GetDifference(Date otherDate)
+int Date::GetDifferenceInDays(Date otherDate)
 {
-	return Date()
+	return GetDayCount() - otherDate.GetDayCount();
 }
 
 int Date::GetDayCount()
@@ -45,4 +52,21 @@ int Date::GetDayCount()
 bool Date::IsEearlier(Date otherDate)
 {
 	return GetDayCount() < otherDate.GetDayCount();
+}
+
+void Date::GD(double jd)
+{
+	
+
+}
+
+bool Date::IsLeapYear()
+{
+	return year % 4 != 0 ? false : year % 100 == 0 ? year % 400 == 0 : true;
+}
+
+ostream& operator<<(ostream& out, const Date& date)
+{
+	out << date.GetDay() << '.' << date.GetMonth() << date.GetYear();
+	return out;
 }

@@ -1,8 +1,13 @@
 ﻿#include <iostream>
+#include <time.h>
 #include "Administrator.h"
+#include "Date.h"
+using namespace std;
+
+
 int main()
 {
-    std::cout << "Hello World!\n";
-    
+    Date date(23, 2, 2021);
+    cout << date.GetDayCount();
     
 }

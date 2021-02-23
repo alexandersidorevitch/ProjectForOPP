@@ -44,6 +44,5 @@ void FileWorker::WriteMembersToFile(string fileName, vector<Member> members)
     {
         file_out << members[i].GetFullName() << endl;
         file_out << members[i].GetSex() << endl;
-        file_out << members[i].GetDate(). ;
     }
 }
