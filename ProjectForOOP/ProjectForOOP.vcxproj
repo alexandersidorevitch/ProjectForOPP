@@ -145,6 +145,7 @@
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="MusicalInstrument.cpp" />
     <ClCompile Include="ProjectForOOP.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Member.h" />
     <ClInclude Include="MusicalInstrument.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ProjectForOOP.rc" />

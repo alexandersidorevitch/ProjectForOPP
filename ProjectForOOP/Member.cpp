@@ -12,7 +12,6 @@ Member::Member(string name, string sex, Date date, string city, MusicalInstrumen
 
 string Member::GetFullName()
 {
-	vector<Member> s = FileWorker::GetMembersFromFile("sds");
 	return fullName;
 }
 
