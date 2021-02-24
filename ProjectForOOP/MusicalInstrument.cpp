@@ -20,6 +20,7 @@ string MusicalInstrument::GetName() const
 ostream& operator<<(ostream& out, const MusicalInstrument& instrument)
 {
 	out << instrument.GetName();
+	return out;
 }
 
 istream& operator>>(istream& in, MusicalInstrument& instrument)
