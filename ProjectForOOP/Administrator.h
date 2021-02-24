@@ -5,7 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
-
+#include "FileWorker.h"
+#include <fstream>
 using namespace std;
 
 class Administrator
@@ -15,7 +16,12 @@ public:
 	void CreateFile(string fileName);
 	void OpenFile(string fileName);
 	void RemoveFile(string fileName);
+	void ViewData();
+	void AppendMember(Member member);
+	void DeleteMember(int index);
+	void EditMember(int index);
 private:
+	
 	bool IsExists(string fileName);
 	ifstream file_in;
 	ofstream file_out;

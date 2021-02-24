@@ -1,6 +1,6 @@
 #include "FileWorker.h"
 
-vector<Member> FileWorker::GetMembersFromFile(ifstream file_in)
+vector<Member> FileWorker::GetMembersFromFile(ifstream& file_in)
 {
 	vector<Member> members;
 
@@ -9,19 +9,16 @@ vector<Member> FileWorker::GetMembersFromFile(ifstream file_in)
 		cout << "Такого файла не существует";
 		return members;
 	}
-	int memberCount;
-	string memberCountStr;
-	getline(file_in, memberCountStr);
-	memberCount = stoi(memberCountStr);
-	for (size_t i = 0; i < memberCount; i++)
+	while (!file_in.eof())
 	{
-		Member member("", "", Date(0, 0, 0), "", "", MusicalInstrument(""), 1);
+		Member member;
 		file_in >> member;
+		members.push_back(member);
 	}
 	return members;
 }
 
-vector<User> FileWorker::GetUsersFromFile(ifstream file_in)
+vector<User> FileWorker::GetUsersFromFile(ifstream& file_in)
 {
 	vector<User> users;
 
@@ -32,19 +29,18 @@ vector<User> FileWorker::GetUsersFromFile(ifstream file_in)
 	}
 	int usersCount;
 	string usersCountStr;
-	getline(file_in, usersCountStr);
-	usersCount = stoi(usersCountStr);
-	for (size_t i = 0; i < usersCount; i++)
+	while(!file_in.eof())
 	{
-		User user("","");
+		User user;
 		file_in >> user;
 	}
 	return users;
 }
 
 
-void FileWorker::WriteMembersToFile(ofstream file_out, vector<Member> members)
+void FileWorker::WriteMembersToFile(ofstream& file_out, vector<Member> members)
 {
+	
 	if (not file_out.is_open())
 	{
 		cout << "Такого файла не существует";
@@ -59,7 +55,7 @@ void FileWorker::WriteMembersToFile(ofstream file_out, vector<Member> members)
 	}
 }
 
-void FileWorker::WriteUsersToFile(ofstream file_out, vector<User> users)
+void FileWorker::WriteUsersToFile(ofstream& file_out, vector<User> users)
 {
 	if (not file_out.is_open())
 	{
@@ -74,4 +70,11 @@ void FileWorker::WriteUsersToFile(ofstream file_out, vector<User> users)
 		}
 	}
 }
+
+void FileWorker::Clear(ofstream& file_out)
+{
+	file_out.clear();
+}
+
+
 

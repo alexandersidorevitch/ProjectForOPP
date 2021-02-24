@@ -2,7 +2,7 @@
 
 Administrator::Administrator()
 {
-	file_in.open("asn.txt");
+
 }
 void Administrator::CreateFile(string fileName)
 {
@@ -25,9 +25,10 @@ void Administrator::OpenFile(string fileName)
 		file_out.close();
 	}
 
+	this->fileName = fileName;
 	file_in.open(fileName);
-	file_out.open(fileName);
-
+	file_out.open(fileName, ios::app);
+	members = FileWorker:: GetMembersFromFile(file_in);
 	cout << "Файл открыт" << endl;
 }
 void Administrator::RemoveFile(string fileName)
@@ -53,6 +54,63 @@ void Administrator::RemoveFile(string fileName)
 		}
 	}
 }
+
+void Administrator::ViewData()
+{
+	if (file_in.is_open())
+	{
+		Member::PrintAsTable(members);
+	}
+	else
+	{
+		cout << "Нужно открыть файл!" << endl;
+	}
+}
+
+void Administrator::AppendMember(Member member)
+{
+	if (file_in.is_open())
+	{
+		Member::Append(members, member);
+		FileWorker::Clear(file_out);
+		FileWorker::WriteMembersToFile(file_out, members);
+	}
+	else
+	{
+		cout << "Нужно открыть файл!" << endl;
+	}
+}
+
+void Administrator::DeleteMember(int index)
+{
+	if (file_in.is_open())
+	{
+		Member::Delete(members, index);
+		FileWorker::Clear(file_out);
+		FileWorker::WriteMembersToFile(file_out, members);
+	}
+	else
+	{
+		cout << "Нужно открыть файл!" << endl;
+	}
+}
+
+void Administrator::EditMember(int index)
+{
+	if (file_in.is_open())
+	{
+		Member::Edit(members, index);
+		FileWorker::Clear(file_out);
+		FileWorker::WriteMembersToFile(file_out, members);
+
+	}
+	else
+	{
+		cout << "Нужно открыть файл!" << endl;
+	}
+}
+
+
 
 bool Administrator::IsExists(string fileName)
 {

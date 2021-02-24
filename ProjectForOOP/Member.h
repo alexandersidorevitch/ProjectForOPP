@@ -20,7 +20,12 @@ public:
 	string GetPhoneNumber();
 	MusicalInstrument GetMusicalInstrument();
 	int GetPlaceByResults();
+	void Input();
+	static void Append(vector<Member>& members, Member member);
+	static void Delete(vector<Member>& members, int index);
+	static void Edit(vector<Member>& members, int index);
 	static void PrintAsTable(vector<Member>& members);
+	static void PrintAsTable(vector<Member>& members, char verticalDelemitr, char gorizontalDelemitr);
 	static void SortByFunc(vector<Member>& members, bool (*comp)(Member,Member));
 	
 
