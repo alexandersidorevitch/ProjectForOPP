@@ -30,7 +30,3 @@ void FileWorker::WriteMembersToFile(ofstream file_out, vector<Member> members)
 	}
 }
 
-void FileWorker::WriteMembersToFile(string fileName, vector<Member> members)
-{
-	
-}
