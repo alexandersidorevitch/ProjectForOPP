@@ -22,6 +22,7 @@ string User::GetPassword() const
 	return this->Password;
 }
 
+
 ostream& operator<<(ostream& out, const User& user)
 {
 	out << user.GetLogin() << endl;

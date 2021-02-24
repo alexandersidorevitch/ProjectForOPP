@@ -3,9 +3,8 @@ using namespace std;
 
 Date::Date(int day, int month, int year)
 {
-	vector<int> dayMonthly = { 31,29,31,30,31,30,31,31,30,31,30,31 };
-	this->month = (month - 1) % 12 + 1;
-	this->day = (day + 1) % dayMonthly[this->month - 1] - 1;
+	this->month = month;
+	this->day = day;
 	this->year = year;
 }
 Date::Date()
@@ -53,13 +52,31 @@ bool Date::IsEearlier(Date otherDate)
 	return GetDayCount() < otherDate.GetDayCount();
 }
 
-string Date::ToString()
+string Date::ToString() const
 {
 	return to_string(GetDay()) + '.' + to_string(GetMonth()) + '.' + to_string(GetYear());
 }
 
 
 
+
+bool Date::operator<(Date firstDate)
+{
+	return year == firstDate.year ?
+		month == firstDate.month ?
+		day < firstDate.day : month < firstDate.month :
+		year < firstDate.year;
+}
+
+bool Date::operator>(Date firstDate)
+{
+
+	return year == firstDate.year ?
+		month == firstDate.month ?
+		day > firstDate.day : month > firstDate.month :
+		year > firstDate.year;
+
+}
 
 bool Date::IsLeapYear()
 {
@@ -68,7 +85,7 @@ bool Date::IsLeapYear()
 
 ostream& operator<<(ostream& out, const Date& date)
 {
-	out << date.GetDay() << '.' << date.GetMonth() << '.' << date.GetYear();
+	out << date.ToString();
 	return out;
 }
 

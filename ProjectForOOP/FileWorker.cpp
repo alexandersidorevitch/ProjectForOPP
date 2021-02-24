@@ -15,7 +15,7 @@ vector<Member> FileWorker::GetMembersFromFile(ifstream file_in)
 	memberCount = stoi(memberCountStr);
 	for (size_t i = 0; i < memberCount; i++)
 	{
-		Member member("", "", Date(0, 0, 0), "", MusicalInstrument(""), 1);
+		Member member("", "", Date(0, 0, 0), "", "", MusicalInstrument(""), 1);
 		file_in >> member;
 	}
 	return members;
