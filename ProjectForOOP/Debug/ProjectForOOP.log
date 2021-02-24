@@ -1,2 +1,13 @@
-﻿  ProjectForOOP.cpp
+﻿  Member.cpp
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(59,23): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(60,18): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(61,19): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(62,19): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(63,29): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(64,26): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(65,20): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(122,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\ProjectForOOP\Member.cpp(128,22): warning C4018: <: несоответствие типов со знаком и без знака
+  ProjectForOOP.cpp
+  Создание кода...
   ProjectForOOP.vcxproj -> C:\Users\User\Desktop\ProgectForOOP\ProjectForOPP\Debug\ProjectForOOP.exe

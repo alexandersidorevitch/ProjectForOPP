@@ -22,6 +22,10 @@ public:
 	int GetPlaceByResults();
 	static void PrintAsTable(vector<Member>& members);
 	static void SortByFunc(vector<Member>& members, bool (*comp)(Member,Member));
+	static void PrintYougestWinner(vector<Member>& members );
+	static void PrintFirstThreePlaceFrommAllInstrument(vector<Member>& members );
+	static void FindByFIO(vector<Member>& members , string NameToFind);
+	static bool FindSubstring(string mainString, string subString);
 	
 
 	//friend ofstream& operator<<(ofstream& out, const Member& member);
