@@ -117,11 +117,7 @@ void Member::PrintAsTable(vector<Member>& members, char verticalDelemitr, char g
 		maxLenghtPhoneNumber = __max(member.phoneNumber.length(), maxLenghtPhoneNumber);
 		maxLenghtPlace = __max(to_string(member.placeByResult).length(), maxLenghtPlace);
 	}
-<<<<<<< HEAD
 	int totalLenght = maxLenghtFullName + maxLenghtCity + maxLenghtSex + maxLenghtDate +
-=======
-	int totalLenght = maxLenghtFullName + maxLenghtSex + maxLenghtDate + maxLenghtCity +
->>>>>>> Taras
 		maxLenghtInstrumentName + maxLenghtPhoneNumber + maxLenghtPlace;
 	string line(totalLenght + 8, gorizontalDelemitr);
 	cout << line << endl;
@@ -132,14 +128,7 @@ void Member::PrintAsTable(vector<Member>& members, char verticalDelemitr, char g
 		<< setw(maxLenghtInstrumentName) << "Имя инструмента" << verticalDelemitr
 		<< setw(maxLenghtPhoneNumber) << "Номер телефона" << verticalDelemitr
 		<< setw(maxLenghtPlace) << "Место" << verticalDelemitr << endl;
-<<<<<<< HEAD
 	cout << line << endl;
-=======
-	string s(totalLenght + 8,gorizontalDelemitr);
-	cout << s;
-
-	cout << endl;
->>>>>>> Taras
 	for (auto member : members) {
 		cout << verticalDelemitr << setw(maxLenghtFullName) << member.fullName << verticalDelemitr
 			<< setw(maxLenghtSex) << member.sex << verticalDelemitr
@@ -148,12 +137,7 @@ void Member::PrintAsTable(vector<Member>& members, char verticalDelemitr, char g
 			<< setw(maxLenghtInstrumentName) << member.musicalInstrument.GetName() << verticalDelemitr
 			<< setw(maxLenghtPhoneNumber) << member.phoneNumber << verticalDelemitr
 			<< setw(maxLenghtPlace) << member.placeByResult << verticalDelemitr << endl;
-<<<<<<< HEAD
 		cout << line << endl;
-=======
-		cout << s;
-		cout << endl;
->>>>>>> Taras
 	}
 }
 
