@@ -117,7 +117,11 @@ void Member::PrintAsTable(vector<Member>& members, char verticalDelemitr, char g
 		maxLenghtPhoneNumber = __max(member.phoneNumber.length(), maxLenghtPhoneNumber);
 		maxLenghtPlace = __max(to_string(member.placeByResult).length(), maxLenghtPlace);
 	}
+<<<<<<< HEAD
 	int totalLenght = maxLenghtFullName + maxLenghtCity + maxLenghtSex + maxLenghtDate +
+=======
+	int totalLenght = maxLenghtFullName + maxLenghtSex + maxLenghtDate + maxLenghtCity +
+>>>>>>> Taras
 		maxLenghtInstrumentName + maxLenghtPhoneNumber + maxLenghtPlace;
 	string line(totalLenght + 8, gorizontalDelemitr);
 	cout << line << endl;
@@ -128,7 +132,14 @@ void Member::PrintAsTable(vector<Member>& members, char verticalDelemitr, char g
 		<< setw(maxLenghtInstrumentName) << "Имя инструмента" << verticalDelemitr
 		<< setw(maxLenghtPhoneNumber) << "Номер телефона" << verticalDelemitr
 		<< setw(maxLenghtPlace) << "Место" << verticalDelemitr << endl;
+<<<<<<< HEAD
 	cout << line << endl;
+=======
+	string s(totalLenght + 8,gorizontalDelemitr);
+	cout << s;
+
+	cout << endl;
+>>>>>>> Taras
 	for (auto member : members) {
 		cout << verticalDelemitr << setw(maxLenghtFullName) << member.fullName << verticalDelemitr
 			<< setw(maxLenghtSex) << member.sex << verticalDelemitr
@@ -137,7 +148,12 @@ void Member::PrintAsTable(vector<Member>& members, char verticalDelemitr, char g
 			<< setw(maxLenghtInstrumentName) << member.musicalInstrument.GetName() << verticalDelemitr
 			<< setw(maxLenghtPhoneNumber) << member.phoneNumber << verticalDelemitr
 			<< setw(maxLenghtPlace) << member.placeByResult << verticalDelemitr << endl;
+<<<<<<< HEAD
 		cout << line << endl;
+=======
+		cout << s;
+		cout << endl;
+>>>>>>> Taras
 	}
 }
 
@@ -149,6 +165,82 @@ void Member::SortByFunc(vector<Member>& members, bool (*comp)(Member, Member))
 	//[](Member memberFirst, Member memberSecond) {return memberFirst.GetPlaceByResults() < memberSecond.GetPlaceByResults(); } //Компоратор для сортировки по местам
 	sort(members.begin(), members.end(), comp);
 
+}
+
+void Member::PrintYougestWinner(vector<Member>& members)
+{
+	
+	vector<Member> WinnersBeforTwelve;
+	for (auto member : members)
+	{
+		if (member.placeByResult <= 3 and member.date.GetDifferenceInDays(Date(24, 2, 2020)) / 365 >= -12)
+		{
+			WinnersBeforTwelve.push_back(member);
+		}
+	}
+	Member::SortByFunc(WinnersBeforTwelve, [](Member memberFirst, Member memberSecond) {return memberFirst.GetDate() > memberSecond.GetDate(); });
+	Member::PrintAsTable(WinnersBeforTwelve);
+}
+
+void Member::PrintFirstThreePlaceFrommAllInstrument(vector<Member>& members)
+{
+	vector<string> NamesOfInstrumaent;
+	for (int i = 0; i < members.size(); i++)
+	{
+		if (find(NamesOfInstrumaent.begin(), NamesOfInstrumaent.end(), members[i].musicalInstrument.GetName()) == NamesOfInstrumaent.end())
+		{
+			NamesOfInstrumaent.push_back(members[i].musicalInstrument.GetName());
+			vector<Member> WinnersByInstruments;
+			for (int j = i; j < members.size(); j++)
+			{
+				if (members[i].musicalInstrument.GetName() == members[j].musicalInstrument.GetName())
+				{
+					WinnersByInstruments.push_back(members[j]);
+				}
+			}
+			Member::SortByFunc(WinnersByInstruments, [](Member memberFirst, Member memberSecond) {return memberFirst.GetPlaceByResults() < memberSecond.GetPlaceByResults(); });
+			if (WinnersByInstruments.size() > 3)
+				WinnersByInstruments.erase(WinnersByInstruments.begin() + 3, WinnersByInstruments.end());
+			cout << "Инструмент: " << members[i].musicalInstrument.GetName() << endl;
+			Member::PrintAsTable(WinnersByInstruments);
+		}
+	}
+
+}
+
+void Member::FindByFIO(vector<Member>& members, string NameToFind)
+{
+	vector<Member> FoundByNameMembers;
+	for (auto member : members)
+	{
+		if (FindSubstring(member.fullName, NameToFind))
+			FoundByNameMembers.push_back(member);
+	}
+	if (FoundByNameMembers.size() == 0)
+	{
+		cout << "Участников с такими именами не найдено!" << endl;
+	}
+	else
+	{
+		Member::SortByFunc(FoundByNameMembers, [](Member memberFirst, Member memberSecond) {return memberFirst.GetFullName() < memberSecond.GetFullName(); });
+		Member::PrintAsTable(FoundByNameMembers);
+	}
+
+}
+
+bool Member::FindSubstring(string mainString, string subString)
+{
+	int size;
+	if (mainString.size() > subString.size())
+		size = subString.size();
+	else
+		size = mainString.size();
+	for (int i = 0;i<=size-1;i++)
+	{
+		if(mainString[i] != subString[i])
+			return false;
+	}
+	return true;
 }
 
 
@@ -180,15 +272,4 @@ istream& operator>>(istream& in, Member& member)
 	member.placeByResult = stoi(placeByResultStr);
 	return in;
 }
-//ifstream& operator>>(ifstream& in, Member& member)
-//{
-//	string placeByResultStr;
-//	getline(in, member.fullName);
-//	getline(in, member.sex);
-//	in >> member.date;
-//	getline(in, member.city);
-//	in >> member.musicalInstrument;
-//	getline(in, placeByResultStr);
-//	member.placeByResult = stoi(placeByResultStr);
-//	return in;
-//}
+

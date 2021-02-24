@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	/*Member s("b", "1", Date(1, 2, 2012), "qw","+375292502017", MusicalInstrument("sosi"), 2);
+	Member s("b", "1", Date(1, 2, 2012), "qw","+375292502017", MusicalInstrument("sosi"), 2);
 	vector<Member> members;
 	members.push_back(s);
 	members.push_back(Member("Сидоревич Александр Юрьевич", "женский", Date(1, 2, 2012), "qhfgsdhghsdw", "+375292502017", MusicalInstrument("soававаsi"), 2));
