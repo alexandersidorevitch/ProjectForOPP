@@ -32,9 +32,6 @@ public:
 	static void FindByFIO(vector<Member>& members , string NameToFind);
 	static bool FindSubstring(string mainString, string subString);
 	
-
-	//friend ofstream& operator<<(ofstream& out, const Member& member);
-	//friend ifstream& operator>>(ifstream& in, Member& member);
 	friend ostream& operator<<(ostream& out, const Member& member);
 	friend istream& operator>>(istream& in, Member& member);
 private:

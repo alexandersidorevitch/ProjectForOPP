@@ -1,1 +1,18 @@
-﻿  ProjectForOOP.vcxproj -> C:\Users\User\source\repos\ProjectForOOP\Debug\ProjectForOOP.exe
+﻿  Administrator.cpp
+  FileWorker.cpp
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\FileWorker.cpp(30,6): warning C4101: usersCount: неиспользованная локальная переменная
+  Member.cpp
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(79,25): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(91,25): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(112,23): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(113,18): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(114,19): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(115,19): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(116,29): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(117,26): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(118,20): warning C4018: >: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(172,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\source\repos\ProjectForOOP\ProjectForOOP\Member.cpp(178,22): warning C4018: <: несоответствие типов со знаком и без знака
+  ProjectForOOP.cpp
+  Создание кода...
+  ProjectForOOP.vcxproj -> C:\Users\User\source\repos\ProjectForOOP\Debug\ProjectForOOP.exe

@@ -24,6 +24,7 @@ int main()
 	string fileName = "1.txt";
 	//administartor.CreateFile(fileName);
 	administartor.OpenFile(fileName);
+	administartor.RemoveFile(fileName);
 	Member member;
 	//member.Input();
 	//administartor.AppendMember(member);
