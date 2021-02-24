@@ -1,5 +1,6 @@
 #include "MusicalInstrument.h"
 #include <string>
+#include <iostream>
 using namespace std;
 MusicalInstrument::MusicalInstrument(string name)
 {
@@ -8,10 +9,21 @@ MusicalInstrument::MusicalInstrument(string name)
 
 MusicalInstrument::MusicalInstrument()
 {
-	MusicalInstrument::MusicalInstrument("");
+	MusicalInstrument::MusicalInstrument("\0");
 }
 
-string MusicalInstrument::GetName()
+string MusicalInstrument::GetName() const
 {
 	return name;
+}
+
+ostream& operator<<(ostream& out, const MusicalInstrument& instrument)
+{
+	out << instrument.GetName();
+}
+
+istream& operator>>(istream& in, MusicalInstrument& instrument)
+{
+	getline(in, instrument.name);
+	return in;
 }

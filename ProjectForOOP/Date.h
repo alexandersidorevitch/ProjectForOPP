@@ -1,21 +1,30 @@
 #pragma once
+
+#include <vector>
+#include <time.h>
+#include <chrono>
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 class Date
 {
 public:
 	Date(int day, int month, int year);
-	Date(int dayCount);
 	Date();
 	int GetDay() const;
 	int GetMonth() const;
 	int GetYear() const;
+	void SetDate(int day, int month, int year);
 	int GetDifferenceInDays(Date otherDate);
 	int GetDayCount();
 	bool IsEearlier(Date otherDate);
-	friend ostream& operator<<(ostream& out, const Date& p);
-	int day;
+	string ToString();
+	friend istream& operator>>(istream& in, Date& p);
+	friend ostream& operator<<(ostream& in,const Date& p);
 private:
-	void GD(double jd);
 	bool IsLeapYear();
+	int day;
 	int month;
 	int year;
 };

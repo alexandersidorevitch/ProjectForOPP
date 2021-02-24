@@ -45,3 +45,39 @@ int Member::GetPlaceByResults()
 {
 	return placeByResult;
 }
+
+ostream& operator<<(ostream& out, const Member& member)
+{
+	out << member.fullName << endl;
+	out << member.sex << endl;
+	out << member.date <<endl;
+	out << member.city << endl;
+	out << member.musicalInstrument << endl;
+	out << member.placeByResult << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Member& member)
+{
+	string placeByResultStr;
+	getline(in, member.fullName);
+	getline(in, member.sex);
+	in >> member.date;
+	getline(in, member.city);
+	in >> member.musicalInstrument;
+	getline(in, placeByResultStr);
+	member.placeByResult = stoi(placeByResultStr);
+	return in;
+}
+//ifstream& operator>>(ifstream& in, Member& member)
+//{
+//	string placeByResultStr;
+//	getline(in, member.fullName);
+//	getline(in, member.sex);
+//	in >> member.date;
+//	getline(in, member.city);
+//	in >> member.musicalInstrument;
+//	getline(in, placeByResultStr);
+//	member.placeByResult = stoi(placeByResultStr);
+//	return in;
+//}

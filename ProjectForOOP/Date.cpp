@@ -1,39 +1,38 @@
 #include "Date.h"
-#include <vector>
-#include <time.h>
-#include <chrono>
-#include <iostream>
 using namespace std;
+
 Date::Date(int day, int month, int year)
 {
-	vector<int> dayMonthly = { 31,29,31,30,31,30,31,31,30,31,30,31};
+	vector<int> dayMonthly = { 31,29,31,30,31,30,31,31,30,31,30,31 };
 	this->month = (month - 1) % 12 + 1;
-	this->day = day % dayMonthly[this->month];
+	this->day = (day + 1) % dayMonthly[this->month - 1] - 1;
 	this->year = year;
-}
-Date::Date(int dayCount)
-{
-	Date::Date(0, 0, 0);
-	
 }
 Date::Date()
 {
 	Date::Date(0, 0, 0);
 }
 
-const int Date::GetDay()
+int Date::GetDay() const
 {
 	return day;
 }
 
-int Date::GetMonth()
+int Date::GetMonth() const
 {
 	return month;
 }
 
-int Date::GetYear()
+int Date::GetYear() const
 {
 	return year;
+}
+
+void Date::SetDate(int day, int month, int year)
+{
+	this->day = day;
+	this->month = month;
+	this->year = year;
 }
 
 int Date::GetDifferenceInDays(Date otherDate)
@@ -54,11 +53,13 @@ bool Date::IsEearlier(Date otherDate)
 	return GetDayCount() < otherDate.GetDayCount();
 }
 
-void Date::GD(double jd)
+string Date::ToString()
 {
-	
-
+	return to_string(GetDay()) + '.' + to_string(GetMonth()) + '.' + to_string(GetYear());
 }
+
+
+
 
 bool Date::IsLeapYear()
 {
@@ -67,6 +68,42 @@ bool Date::IsLeapYear()
 
 ostream& operator<<(ostream& out, const Date& date)
 {
-	out << date.GetDay() << '.' << date.GetMonth() << date.GetYear();
+	out << date.GetDay() << '.' << date.GetMonth() << '.' << date.GetYear();
 	return out;
 }
+
+istream& operator>>(istream& in, Date& p)
+{
+	int day, month, year;
+	string dayStr, monthStr, yearStr;
+	getline(in, dayStr, '.');
+	day = stoi(dayStr);
+	getline(in, monthStr, '.');
+	month = stoi(monthStr);
+	getline(in, yearStr);
+	year = stoi(yearStr);
+	p.SetDate(day, month, year);
+	return in;
+
+
+}
+
+//ofstream& operator<<(ofstream& out, const Date& date)
+//{
+//	out << date.GetDay() << '.' << date.GetMonth() << '.' << date.GetYear() << endl;
+//	return out;
+//}
+//
+//ifstream& operator>>(ifstream& in, Date& date)
+//{
+//	int day, month, year;
+//	string dayStr, monthStr, yearStr;
+//	getline(in, dayStr, '.');
+//	day = stoi(dayStr);
+//	getline(in, monthStr, '.');
+//	month = stoi(monthStr);
+//	getline(in, yearStr);
+//	year = stoi(yearStr);
+//	p.SetDate(day, month, year);
+//	return in;
+//}

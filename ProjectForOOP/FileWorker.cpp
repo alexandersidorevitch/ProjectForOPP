@@ -1,48 +1,36 @@
 #include "FileWorker.h"
 
-vector<Member> FileWorker::GetMembersFromFile(string fileName)
+vector<Member> FileWorker::GetMembersFromFile(ifstream file_in)
 {
-    vector<Member> members;
-    ifstream file_in(fileName);
+	vector<Member> members;
 
-    if (not file_in.is_open())
-    {
-        cout << "Такого файла не существует";
-        return vector<Member>();
-    }
+	if (not file_in.is_open())
+	{
+		cout << "Такого файла не существует";
+		return members;
+	}
+	int memberCount;
+	string memberCountStr;
+	getline(file_in, memberCountStr);
+	memberCount = stoi(memberCountStr);
+	for (size_t i = 0; i < memberCount; i++)
+	{
+		Member member("", "", Date(0, 0, 0), "", MusicalInstrument(""), 1);
+		file_in >> member;
+	}
+	return members;
+}
 
-    int memberCount;
-    file_in >> memberCount;
-    string name, sex, city;
-    int placeByResult;
-    int day, month, year;
-    string musicalInstrumentName;
 
-    for (size_t i = 0; i < memberCount; i++)
-    {
-        getline(file_in, name);
-        getline(file_in, sex);
-        file_in >> day >> month >> year;
-        file_in.ignore();
-        getline(file_in, city);
-        getline(file_in, musicalInstrumentName);
-        file_in >> placeByResult;
-
-        Date date;
-        MusicalInstrument musicalInstrument(musicalInstrumentName);
-        Member member(name, sex, date, city, musicalInstrument, placeByResult);
-        members.push_back(member);
-    }
-    file_in.close();
-    return members;
+void FileWorker::WriteMembersToFile(ofstream file_out, vector<Member> members)
+{
+	for (auto member : members)
+	{
+		file_out << member;
+	}
 }
 
 void FileWorker::WriteMembersToFile(string fileName, vector<Member> members)
 {
-    ofstream file_out(fileName);
-    for (size_t i = 0; i < members.size(); i++)
-    {
-        file_out << members[i].GetFullName() << endl;
-        file_out << members[i].GetSex() << endl;
-    }
+	
 }
