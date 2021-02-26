@@ -21,9 +21,11 @@ public:
 	int GetDifferenceInDays(Date otherDate);
 	int GetDayCount();
 	bool IsEearlier(Date otherDate);
-	string ToString();
+	string ToString() const;
 	friend istream& operator>>(istream& in, Date& p);
 	friend ostream& operator<<(ostream& in,const Date& p);
+	bool operator < (Date firstDate);
+	bool operator > (Date firstDate);
 private:
 	bool IsLeapYear();
 	int day;

@@ -53,16 +53,7 @@ void Administrator::RemoveFile(string fileName)
 		}
 	}
 }
-void Administrator::PrintTable()
-{
-	int maxLenghtFullName = 0, maxLenghtSex = 0, maxLenght;
-	for (auto member : members) {
-		if (maxLenghtFullName < member.GetFullName().length())
-		{
-			maxLenghtFullName = member.GetFullName().length();
-		}
-	}
-}
+
 bool Administrator::IsExists(string fileName)
 {
 	ifstream fin(fileName);

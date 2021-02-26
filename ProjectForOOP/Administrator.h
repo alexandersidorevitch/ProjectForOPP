@@ -15,7 +15,6 @@ public:
 	void CreateFile(string fileName);
 	void OpenFile(string fileName);
 	void RemoveFile(string fileName);
-	void PrintTable();
 private:
 	bool IsExists(string fileName);
 	ifstream file_in;
