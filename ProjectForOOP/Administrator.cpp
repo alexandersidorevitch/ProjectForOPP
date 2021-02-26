@@ -4,6 +4,11 @@ Administrator::Administrator()
 {
 
 }
+Administrator::Administrator(string userFileName, string memberFileName)
+{
+	this->memberFileName = memberFileName;
+	this->userFileName = userFileName;
+}
 void Administrator::CreateFile(string fileName)
 {
 	if (IsExists(fileName))
@@ -19,16 +24,8 @@ void Administrator::CreateFile(string fileName)
 }
 void Administrator::OpenFile(string fileName)
 {
-	if (file_in.is_open())
-	{
-		file_in.close();
-		file_out.close();
-	}
-
-	this->fileName = fileName;
-	file_in.open(fileName);
-	file_out.open(fileName, ios::app);
-	members = FileWorker:: GetMembersFromFile(file_in);
+	ifstream file_in(fileName);
+	members = FileWorker::GetMembersFromFile(file_in);
 	cout << "Файл открыт" << endl;
 }
 void Administrator::RemoveFile(string fileName)
@@ -39,11 +36,6 @@ void Administrator::RemoveFile(string fileName)
 	}
 	else
 	{
-		if (this->fileName == fileName)
-		{
-			file_in.close();
-			file_out.close();
-		}
 		if (remove(fileName.c_str()) == -1)
 		{
 			cout << "Файл не получилось удалить" << endl;
@@ -57,57 +49,66 @@ void Administrator::RemoveFile(string fileName)
 
 void Administrator::ViewData()
 {
-	if (file_in.is_open())
-	{
 		Member::PrintAsTable(members);
-	}
-	else
-	{
-		cout << "Нужно открыть файл!" << endl;
-	}
 }
 
 void Administrator::AppendMember(Member member)
 {
-	if (file_in.is_open())
-	{
-		Member::Append(members, member);
-		FileWorker::Clear(file_out);
-		FileWorker::WriteMembersToFile(file_out, members);
-	}
-	else
-	{
-		cout << "Нужно открыть файл!" << endl;
-	}
+	ofstream file_out(memberFileName);
+
+	Member::Append(members, member);
+	FileWorker::Clear(file_out);
+	FileWorker::WriteMembersToFile(file_out, members);
+
 }
 
 void Administrator::DeleteMember(int index)
 {
-	if (file_in.is_open())
-	{
-		Member::Remove(members, index);
-		FileWorker::Clear(file_out);
-		FileWorker::WriteMembersToFile(file_out, members);
-	}
-	else
-	{
-		cout << "Нужно открыть файл!" << endl;
-	}
+	ofstream file_out(memberFileName);
+
+	Member::Remove(members, index);
+	FileWorker::Clear(file_out);
+	FileWorker::WriteMembersToFile(file_out, members);
+
+
 }
 
 void Administrator::EditMember(int index)
 {
-	if (file_in.is_open())
-	{
-		Member::Edit(members, index);
-		FileWorker::Clear(file_out);
-		FileWorker::WriteMembersToFile(file_out, members);
+	ofstream file_out(memberFileName);
+	
+	Member::Edit(members, index);
+	FileWorker::Clear(file_out);
+	FileWorker::WriteMembersToFile(file_out, members);
 
-	}
-	else
-	{
-		cout << "Нужно открыть файл!" << endl;
-	}
+
+}
+
+void Administrator::AppendUser(User user)
+{
+	ofstream file_out(userFileName);
+
+	User::Append(users, user);
+	FileWorker::Clear(file_out);
+	FileWorker::WriteUsersToFile(file_out, users);
+}
+
+void Administrator::DeleteUser(int index)
+{
+	ofstream file_out(userFileName);
+
+	User::Remove(users, index);
+	FileWorker::Clear(file_out);
+	FileWorker::WriteUsersToFile(file_out, users);
+}
+
+void Administrator::EditUser(int index)
+{
+	ofstream file_out(userFileName);
+
+	User::Edit(users, index);
+	FileWorker::Clear(file_out);
+	FileWorker::WriteUsersToFile(file_out, users);
 }
 
 

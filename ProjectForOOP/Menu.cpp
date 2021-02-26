@@ -10,7 +10,7 @@ using namespace std;
 
 void Menu::RunUserMenu()
 {
-	setlocale(0,"");
+	setlocale(0, "");
 	ifstream reader("1.txt");
 	vector<Member> members = FileWorker::GetMembersFromFile(reader);
 	bool exitMenu = true;
@@ -31,7 +31,7 @@ void Menu::RunUserMenu()
 		{
 			Member::PrintAsTable(members);
 		}
-			break;
+		break;
 		case 2:
 		{
 			cout << "¬ведите им€ дл€ поиска: " << endl;
@@ -39,7 +39,7 @@ void Menu::RunUserMenu()
 			getline(cin, name);
 			Member::FindByFIO(members, name);
 		}
-			break;
+		break;
 		case 3:
 		{
 			bool exitSubMenu = true;
@@ -80,19 +80,19 @@ void Menu::RunUserMenu()
 				system("pause");
 			}
 		}
-			break;
+		break;
 		case 4:
 		{
 			cout << "ѕервое индивидуальное задание:" << endl << endl;
 			Member::PrintFirstThreePlaceFrommAllInstrument(members);
 		}
-			break;
+		break;
 		case 5:
 		{
 			cout << "¬торое индивидуальное задание:" << endl << endl;
 			Member::PrintYougestWinner(members);
 		}
-			break;
+		break;
 		case 6:
 			exitMenu = false;
 			break;
@@ -108,14 +108,13 @@ void Menu::RunUserMenu()
 void Menu::RunAdminMenu()
 {
 	setlocale(0, "");
-	ifstream reader("1.txt");
-	vector<Member> members = FileWorker::GetMembersFromFile(reader);
-	reader.close();
-	reader.open("2.txt");
-	vector<User> users = FileWorker::GetUsersFromFile(reader);
-	reader.close();
-	Administrator admin;
-	admin.OpenFile("2.txt");
+	string userFileName, memberFileName;
+	cout << "¬ведите им€ файла, где распологаютьс€ пользователи (по умолчанию user.txt)" << endl;
+	getline(cin, userFileName);
+	cout << "¬ведите им€ файла, где распологаютьс€ участники (по умолчанию member.txt)" << endl;
+	getline(cin, memberFileName);
+
+	Administrator admin(userFileName, memberFileName);
 	bool exitMenu = true;
 	while (exitMenu)
 	{
@@ -146,27 +145,27 @@ void Menu::RunAdminMenu()
 				{
 				case 1:
 				{
-					User::PrintAsTable(users);
+					admin.ViewData();
 				}
-					break;
+				break;
 				case 2:
 				{
 					User user;
 					user.Input();
-					User::Append(users, user);
+					admin.AppendUser(user);
 				}
 				case 3:
 				{
 					cout << "¬ведите пор€дковый номер пользовател€:" << endl;
 					int number = GetNumber();
-					User::Edit(users,number);
+					admin.EditUser(number);
 				}
-					break;
+				break;
 				case 4:
 				{
 					cout << "¬ведите пор€дковый номер пользовател€:" << endl;
 					int number = GetNumber();
-					User::Remove(users, number);
+					admin.DeleteUser(number);
 				}
 				break;
 				case 5:
@@ -199,7 +198,7 @@ void Menu::RunAdminMenu()
 				{
 					cout << "¬ведите им€ файла:" << endl;
 					string fileName;
-					getline(cin,fileName);
+					getline(cin, fileName);
 					admin.CreateFile(fileName);
 				}
 				break;
@@ -326,7 +325,7 @@ void Menu::FirstMenu()
 int Menu::GetNumber()
 {
 	string num;
-	int k ;
+	int k;
 	while (true)
 	{
 		getline(cin, num);

@@ -13,6 +13,7 @@ class Administrator
 {
 public:
 	Administrator();
+	Administrator(string userFileName, string memberFileName);
 	void CreateFile(string fileName);
 	void OpenFile(string fileName);
 	void RemoveFile(string fileName);
@@ -20,12 +21,15 @@ public:
 	void AppendMember(Member member);
 	void DeleteMember(int index);
 	void EditMember(int index);
+	void AppendUser(User member);
+	void DeleteUser(int index);
+	void EditUser(int index);
 private:
 	
 	bool IsExists(string fileName);
-	ifstream file_in;
-	ofstream file_out;
 	vector<Member> members;
-	string fileName;
+	vector<User> users;
+	string memberFileName;
+	string userFileName;
 };
 
