@@ -27,19 +27,19 @@ int Date::GetYear() const
 	return year;
 }
 
-void Date::SetDate(int day, int month, int year)
+void Date::setDate(int day, int month, int year)
 {
 	this->day = day;
 	this->month = month;
 	this->year = year;
 }
 
-int Date::GetDifferenceInDays(Date otherDate)
+int Date::getDifferenceInDays(Date otherDate)
 {
-	return GetDayCount() - otherDate.GetDayCount();
+	return getDayCount() - otherDate.getDayCount();
 }
 
-int Date::GetDayCount()
+int Date::getDayCount()
 {
 	int a = (14 - month) / 12;
 	int y = year + 4800 - a;
@@ -49,7 +49,7 @@ int Date::GetDayCount()
 
 bool Date::IsEearlier(Date otherDate)
 {
-	return GetDayCount() < otherDate.GetDayCount();
+	return getDayCount() < otherDate.getDayCount();
 }
 
 string Date::ToString() const
@@ -99,7 +99,7 @@ istream& operator>>(istream& in, Date& p)
 	month = stoi(monthStr);
 	getline(in, yearStr);
 	year = stoi(yearStr);
-	p.SetDate(day, month, year);
+	p.setDate(day, month, year);
 	return in;
 
 

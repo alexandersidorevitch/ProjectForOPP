@@ -13,10 +13,10 @@ public:
 	string GetPassword() const;
 	void Input();
 	static void Append(vector<User>& users, User user);
-	static void Delete(vector<User>& users, int index);
+	static void Remove(vector<User>& users, int index);
 	static void Edit(vector<User>& users, int index);
 	static void PrintAsTable(vector<User>& members);
-	static void PrintAsTable(vector<User>& members, char verticalDelemitr, char gorizontalDelemitr);
+	static void PrintAsTable(vector<User>& members, string verticalDelemitr, char gorizontalDelemitr);
 
 	friend ostream& operator<<(ostream& out, const User& user);
 	friend istream& operator>>(istream& in, User& user);

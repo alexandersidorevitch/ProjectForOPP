@@ -37,7 +37,7 @@ void User::Append(vector<User>& users, User user)
 	users.push_back(user);
 }
 
-void User::Delete(vector<User>& users, int index)
+void User::Remove(vector<User>& users, int index)
 {
 	if (index < 0 || index >= users.size())
 	{
@@ -62,10 +62,10 @@ void User::Edit(vector<User>& users, int index)
 
 void User::PrintAsTable(vector<User>& users)
 {
-	PrintAsTable(users, '|', '_');
+	PrintAsTable(users, " | ", '*');
 }
 
-void User::PrintAsTable(vector<User>& users, char verticalDelemitr, char gorizontalDelemitr)
+void User::PrintAsTable(vector<User>& users, string verticalDelemitr, char gorizontalDelemitr)
 {
 	setlocale(0, "");
 	int maxLenghtLogin = 5, maxLenghtPassword = 6;
@@ -74,15 +74,15 @@ void User::PrintAsTable(vector<User>& users, char verticalDelemitr, char gorizon
 		maxLenghtPassword = __max(user.Password.length(), maxLenghtPassword);
 	}
 	int totalLenght = maxLenghtLogin + maxLenghtPassword ;
-	string line(totalLenght + 3, gorizontalDelemitr);
+	string line(totalLenght + 5, gorizontalDelemitr);
 	cout << line << endl;
-	cout << verticalDelemitr << setw(maxLenghtLogin) << "Логин" << verticalDelemitr
-		<< setw(maxLenghtPassword) << "Пароль" << verticalDelemitr;
-	cout << line << endl;
+	cout << '|' << setw(maxLenghtLogin) << "Логин" << verticalDelemitr
+		<< setw(maxLenghtPassword) << "Пароль" << '|';
+	cout << line << endl<<endl;
 	for (auto user : users) {
-		cout << verticalDelemitr << setw(maxLenghtLogin) << user.Login << verticalDelemitr
-			<< setw(maxLenghtPassword) << user.Password << verticalDelemitr;
-		cout << line << endl;
+		cout << '|' << setw(maxLenghtLogin) << user.Login << verticalDelemitr
+			<< setw(maxLenghtPassword) << user.Password << '|';
+		cout << line << endl ;
 	}
 }
 

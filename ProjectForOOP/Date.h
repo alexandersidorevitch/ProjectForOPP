@@ -17,9 +17,9 @@ public:
 	int GetDay() const;
 	int GetMonth() const;
 	int GetYear() const;
-	void SetDate(int day, int month, int year);
-	int GetDifferenceInDays(Date otherDate);
-	int GetDayCount();
+	void setDate(int day, int month, int year);
+	int getDifferenceInDays(Date otherDate);
+	int getDayCount();
 	bool IsEearlier(Date otherDate);
 	string ToString() const;
 	friend istream& operator>>(istream& in, Date& p);

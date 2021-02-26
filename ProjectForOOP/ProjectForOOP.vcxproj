@@ -143,6 +143,7 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="FileWorker.cpp" />
     <ClCompile Include="Member.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MusicalInstrument.cpp" />
     <ClCompile Include="ProjectForOOP.cpp" />
     <ClCompile Include="User.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Date.h" />
     <ClInclude Include="FileWorker.h" />
     <ClInclude Include="Member.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="MusicalInstrument.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="User.h" />

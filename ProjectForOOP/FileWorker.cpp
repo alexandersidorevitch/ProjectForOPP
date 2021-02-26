@@ -47,7 +47,7 @@ void FileWorker::WriteMembersToFile(ofstream& file_out, vector<Member> members)
 	}
 	else
 	{
-		file_out << members.size()<<endl;
+
 		for (auto member : members)
 		{
 			file_out << member<<endl;
@@ -63,7 +63,6 @@ void FileWorker::WriteUsersToFile(ofstream& file_out, vector<User> users)
 	}
 	else
 	{
-		file_out << users.size() << endl;
 		for (auto user : users)
 		{
 			file_out << user<<endl;

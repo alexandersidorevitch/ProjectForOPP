@@ -85,7 +85,7 @@ void Administrator::DeleteMember(int index)
 {
 	if (file_in.is_open())
 	{
-		Member::Delete(members, index);
+		Member::Remove(members, index);
 		FileWorker::Clear(file_out);
 		FileWorker::WriteMembersToFile(file_out, members);
 	}
