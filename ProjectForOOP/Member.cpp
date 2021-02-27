@@ -1,5 +1,6 @@
 #include "Member.h"
 #include "FileWorker.h"
+#include "Menu.h"
 Member::Member()
 {
 }
@@ -63,10 +64,8 @@ void Member::Input()
 	getline(cin, phoneNumber);
 	cout << "Введите назвние муз.иструмента" << endl;
 	cin >> musicalInstrument;
-	cout << "Введите место" << endl;
-	string place;
-	getline(cin, place);
-	placeByResult = stoi(place);
+	cout << "Введите место:" << endl;
+	placeByResult = Menu::GetNumber();
 }
 
 void Member::Append(vector<Member>& members, Member member)
@@ -107,7 +106,7 @@ void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char
 {
 	setlocale(0, "");
 	int maxLenghtFullName = 6, maxLenghtSex = 3, maxLenghtDate = 4,
-		maxLenghtCity = 5, maxLenghtInstrumentName = 16, maxLenghtPhoneNumber = 14, maxLenghtPlace = 5;
+		maxLenghtCity = 5, maxLenghtInstrumentName = 16, maxLenghtPhoneNumber = 14, maxLenghtPlace = 5, maxLenghtIndex = __max(to_string(members.size()).length(), 5);
 	for (auto member : members) {
 		maxLenghtFullName = __max(member.fullName.length(), maxLenghtFullName);
 		maxLenghtSex = __max(member.sex.length(), maxLenghtSex);
@@ -117,11 +116,13 @@ void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char
 		maxLenghtPhoneNumber = __max(member.phoneNumber.length(), maxLenghtPhoneNumber);
 		maxLenghtPlace = __max(to_string(member.placeByResult).length(), maxLenghtPlace);
 	}
+
 	int totalLenght = maxLenghtFullName + maxLenghtCity + maxLenghtSex + maxLenghtDate +
-		maxLenghtInstrumentName + maxLenghtPhoneNumber + maxLenghtPlace;
-	string line(totalLenght + 20, gorizontalDelemitr);
+		maxLenghtInstrumentName + maxLenghtPhoneNumber + maxLenghtPlace + maxLenghtIndex;
+	string line(totalLenght + 23, gorizontalDelemitr);
 	cout << line << endl;
-	cout << '|' << setw(maxLenghtFullName) << "Ф.И.О." << verticalDelemitr
+	cout << '|' << setw(maxLenghtIndex) << "Номер" << verticalDelemitr
+		<< setw(maxLenghtFullName) << "Ф.И.О." << verticalDelemitr
 		<< setw(maxLenghtSex) << "Пол" << verticalDelemitr
 		<< setw(maxLenghtDate) << "Дата" << verticalDelemitr
 		<< setw(maxLenghtCity) << "Город" << verticalDelemitr
@@ -129,8 +130,9 @@ void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char
 		<< setw(maxLenghtPhoneNumber) << "Номер телефона" << verticalDelemitr
 		<< setw(maxLenghtPlace) << "Место" << '|' << endl;
 	cout << line << endl << endl;
+	int index = 1;
 	for (auto member : members) {
-		cout << '|' << setw(maxLenghtFullName) << member.fullName << verticalDelemitr
+		cout << '|' << setw(maxLenghtIndex) << index << verticalDelemitr << setw(maxLenghtFullName) << member.fullName << verticalDelemitr
 			<< setw(maxLenghtSex) << member.sex << verticalDelemitr
 			<< setw(maxLenghtDate) << member.date << verticalDelemitr
 			<< setw(maxLenghtCity) << member.city << verticalDelemitr
@@ -138,6 +140,7 @@ void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char
 			<< setw(maxLenghtPhoneNumber) << member.phoneNumber << verticalDelemitr
 			<< setw(maxLenghtPlace) << member.placeByResult << '|' << endl;
 		cout << line << endl;
+		index++;
 	}
 }
 
@@ -152,7 +155,7 @@ void Member::SortByFunc(vector<Member>& members, bool (*comp)(Member, Member))
 
 void Member::PrintYougestWinner(vector<Member>& members)
 {
-	
+
 	vector<Member> WinnersBeforTwelve;
 	for (auto member : members)
 	{
@@ -225,9 +228,9 @@ bool Member::FindSubstring(string mainString, string subString)
 		size = subString.size();
 	else
 		size = mainString.size();
-	for (int i = 0;i<=size-1;i++)
+	for (int i = 0; i <= size - 1; i++)
 	{
-		if(mainString[i] != subString[i])
+		if (mainString[i] != subString[i])
 			return false;
 	}
 	return true;
@@ -259,6 +262,7 @@ istream& operator>>(istream& in, Member& member)
 	getline(in, member.phoneNumber);
 	in >> member.musicalInstrument;
 	getline(in, placeByResultStr);
+
 	member.placeByResult = stoi(placeByResultStr);
 	return in;
 }

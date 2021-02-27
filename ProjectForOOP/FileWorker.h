@@ -6,11 +6,12 @@
 class FileWorker
 {
 public:
-	static vector<Member> GetMembersFromFile(ifstream& file_in);
-	static vector<User> GetUsersFromFile(ifstream& file_in);
-	static void WriteMembersToFile(ofstream& file_out, vector<Member> members);
-	static void WriteUsersToFile(ofstream& file_out, vector<User> users);
-	static void Clear(ofstream& file_out);
+	//static vector<Member> GetMembersFromFile(ifstream& file_in);
+	static vector<Member> GetMembersFromFile(string fileName);
+	static vector<User> GetUsersFromFile(string fileName);
+	static void WriteMembersToFile(string fileName, vector<Member> members);
+	static void WriteUsersToFile(string fileName, vector<User> users);
+	static bool IsExists(string fileName);
 private:
 	FileWorker() {}
 	

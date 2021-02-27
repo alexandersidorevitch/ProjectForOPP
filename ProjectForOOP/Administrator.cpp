@@ -8,10 +8,16 @@ Administrator::Administrator(string userFileName, string memberFileName)
 {
 	this->memberFileName = memberFileName;
 	this->userFileName = userFileName;
+
+	//file_in.open(userFileName);
+	users = FileWorker::GetUsersFromFile(userFileName);
+
+	members = FileWorker::GetMembersFromFile(memberFileName);
+
 }
 void Administrator::CreateFile(string fileName)
 {
-	if (IsExists(fileName))
+	if (FileWorker::IsExists(fileName))
 	{
 		cout << "Файл уже существует" << endl;
 	}
@@ -24,13 +30,12 @@ void Administrator::CreateFile(string fileName)
 }
 void Administrator::OpenFile(string fileName)
 {
-	ifstream file_in(fileName);
-	members = FileWorker::GetMembersFromFile(file_in);
+	members = FileWorker::GetMembersFromFile(fileName);
 	cout << "Файл открыт" << endl;
 }
 void Administrator::RemoveFile(string fileName)
 {
-	if (not IsExists(fileName))
+	if (not FileWorker::IsExists(fileName))
 	{
 		cout << "Такого файла нет" << endl;
 	}
@@ -47,76 +52,63 @@ void Administrator::RemoveFile(string fileName)
 	}
 }
 
-void Administrator::ViewData()
+void Administrator::ViewMembers()
 {
-		Member::PrintAsTable(members);
+	Member::PrintAsTable(members);
 }
 
 void Administrator::AppendMember(Member member)
 {
-	ofstream file_out(memberFileName);
 
 	Member::Append(members, member);
-	FileWorker::Clear(file_out);
-	FileWorker::WriteMembersToFile(file_out, members);
+	FileWorker::WriteMembersToFile(memberFileName, members);
 
 }
 
 void Administrator::DeleteMember(int index)
 {
-	ofstream file_out(memberFileName);
 
 	Member::Remove(members, index);
-	FileWorker::Clear(file_out);
-	FileWorker::WriteMembersToFile(file_out, members);
+	FileWorker::WriteMembersToFile(memberFileName, members);
 
 
 }
 
 void Administrator::EditMember(int index)
 {
-	ofstream file_out(memberFileName);
-	
+
 	Member::Edit(members, index);
-	FileWorker::Clear(file_out);
-	FileWorker::WriteMembersToFile(file_out, members);
+	FileWorker::WriteMembersToFile(memberFileName, members);
 
 
 }
 
 void Administrator::AppendUser(User user)
 {
-	ofstream file_out(userFileName);
 
 	User::Append(users, user);
-	FileWorker::Clear(file_out);
-	FileWorker::WriteUsersToFile(file_out, users);
+	FileWorker::WriteUsersToFile(userFileName, users);
 }
 
 void Administrator::DeleteUser(int index)
 {
-	ofstream file_out(userFileName);
 
 	User::Remove(users, index);
-	FileWorker::Clear(file_out);
-	FileWorker::WriteUsersToFile(file_out, users);
+	FileWorker::WriteUsersToFile(userFileName, users);
 }
 
 void Administrator::EditUser(int index)
 {
-	ofstream file_out(userFileName);
 
 	User::Edit(users, index);
-	FileWorker::Clear(file_out);
-	FileWorker::WriteUsersToFile(file_out, users);
+	FileWorker::WriteUsersToFile(userFileName, users);
 }
 
-
-
-bool Administrator::IsExists(string fileName)
+void Administrator::ViewUsers()
 {
-	ifstream fin(fileName);
-	bool isExists = fin.is_open();
-	fin.close();
-	return isExists;
+	User::PrintAsTable(users);
 }
+
+
+
+

@@ -1,78 +1,106 @@
 #include "FileWorker.h"
 
-vector<Member> FileWorker::GetMembersFromFile(ifstream& file_in)
+vector<Member> FileWorker::GetMembersFromFile(string fileName)
 {
 	vector<Member> members;
+	ifstream file_in(fileName);
 
-	if (not file_in.is_open())
+	if (not IsExists(fileName) )
 	{
 		cout << "Такого файла не существует";
 		return members;
 	}
-	while (!file_in.eof())
+	if (file_in.peek() == EOF)
 	{
-		Member member;
-		file_in >> member;
+		return members;
+	}
+
+
+	Member member;
+	while (file_in >> member && file_in.peek() != EOF)
+	{
 		members.push_back(member);
 	}
 	return members;
 }
 
-vector<User> FileWorker::GetUsersFromFile(ifstream& file_in)
+vector<User> FileWorker::GetUsersFromFile(string fileName)
 {
 	vector<User> users;
-
-	if (not file_in.is_open())
+	ifstream file_in(fileName);
+	if (not IsExists(fileName))
 	{
 		cout << "Такого файла не существует";
 		return users;
 	}
+	if (file_in.peek() == EOF)
+	{
+		return users;
+	}
 	int usersCount;
 	string usersCountStr;
-	while(!file_in.eof())
+	User user;
+
+	while (file_in >> user && file_in.peek() != EOF)
 	{
-		User user;
-		file_in >> user;
+		users.push_back(user);
 	}
 	return users;
 }
 
 
-void FileWorker::WriteMembersToFile(ofstream& file_out, vector<Member> members)
+void FileWorker::WriteMembersToFile(string fileName, vector<Member> members)
 {
-	
-	if (not file_out.is_open())
+	ofstream file_out(fileName); 
+	if (not IsExists(fileName))
 	{
 		cout << "Такого файла не существует";
 	}
 	else
 	{
 
-		for (auto member : members)
+		for (int i = 0; i + 1 < members.size(); i++)
 		{
-			file_out << member<<endl;
+			file_out << members[i] << endl;
 		}
+		if (members.size() != 0)
+		{
+			file_out << members[members.size() - 1];
+		}
+
 	}
+	file_out.close();
+
 }
 
-void FileWorker::WriteUsersToFile(ofstream& file_out, vector<User> users)
+void FileWorker::WriteUsersToFile(string fileName, vector<User> users)
 {
-	if (not file_out.is_open())
+	ofstream file_out(fileName);
+
+	if (not IsExists(fileName))
 	{
 		cout << "Такого файла не существует";
 	}
 	else
 	{
-		for (auto user : users)
+		for (int i = 0; i + 1 < users.size(); i++)
 		{
-			file_out << user<<endl;
+			file_out << users[i] << endl;
+		}
+		if (users.size() > 0)
+		{
+			file_out << users[users.size() - 1];
 		}
 	}
+	file_out.close();
 }
 
-void FileWorker::Clear(ofstream& file_out)
+bool FileWorker::IsExists(string fileName)
 {
-	file_out.clear();
+	ifstream fin(fileName);
+	bool isExists = fin.is_open();
+	fin.close();
+	return isExists;
 }
 
 

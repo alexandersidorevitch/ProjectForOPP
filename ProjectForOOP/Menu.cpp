@@ -8,11 +8,16 @@
 #include "Administrator.h"
 using namespace std;
 
-void Menu::RunUserMenu()
+void Menu::RunMemberMenu()
 {
 	setlocale(0, "");
-	ifstream reader("1.txt");
-	vector<Member> members = FileWorker::GetMembersFromFile(reader);
+
+	string userFileName, memberFileName;
+	cout << "¬ведите им€ файла, где распологаютьс€ пользователи (по умолчанию members.txt), нажмите Enter дл€ использовани€ файла по умолчанию" << endl;
+	getline(cin, userFileName);
+	memberFileName = memberFileName.empty() ? "members.txt" : memberFileName;
+	
+	vector<Member> members = FileWorker::GetMembersFromFile(memberFileName);
 	bool exitMenu = true;
 	while (exitMenu)
 	{
@@ -109,10 +114,12 @@ void Menu::RunAdminMenu()
 {
 	setlocale(0, "");
 	string userFileName, memberFileName;
-	cout << "¬ведите им€ файла, где распологаютьс€ пользователи (по умолчанию user.txt)" << endl;
+	cout << "¬ведите им€ файла, где распологаютьс€ пользователи (по умолчанию users.txt), нажмите Enter дл€ использовани€ файла по умолчанию" << endl;
 	getline(cin, userFileName);
-	cout << "¬ведите им€ файла, где распологаютьс€ участники (по умолчанию member.txt)" << endl;
+	userFileName = userFileName.empty() ? "users.txt" : userFileName;
+	cout << "¬ведите им€ файла, где распологаютьс€ участники (по умолчанию members.txt), нажмите Enter дл€ использовани€ файла по умолчанию" << endl;
 	getline(cin, memberFileName);
+	memberFileName = memberFileName.empty() ? "members.txt" : memberFileName;
 
 	Administrator admin(userFileName, memberFileName);
 	bool exitMenu = true;
@@ -145,7 +152,7 @@ void Menu::RunAdminMenu()
 				{
 				case 1:
 				{
-					admin.ViewData();
+					admin.ViewUsers();
 				}
 				break;
 				case 2:
@@ -154,17 +161,18 @@ void Menu::RunAdminMenu()
 					user.Input();
 					admin.AppendUser(user);
 				}
+				break;
 				case 3:
 				{
 					cout << "¬ведите пор€дковый номер пользовател€:" << endl;
-					int number = GetNumber();
+					int number = GetNumber() - 1;
 					admin.EditUser(number);
 				}
 				break;
 				case 4:
 				{
 					cout << "¬ведите пор€дковый номер пользовател€:" << endl;
-					int number = GetNumber();
+					int number = GetNumber() - 1;
 					admin.DeleteUser(number);
 				}
 				break;
@@ -209,6 +217,7 @@ void Menu::RunAdminMenu()
 					getline(cin, fileName);
 					admin.OpenFile(fileName);
 				}
+				break;
 				case 3:
 				{
 					cout << "¬ведите им€ файла:" << endl;
@@ -246,7 +255,7 @@ void Menu::RunAdminMenu()
 				{
 				case 1:
 				{
-					admin.ViewData();
+					admin.ViewMembers();
 				}
 				break;
 				case 2:
@@ -255,16 +264,18 @@ void Menu::RunAdminMenu()
 					member.Input();
 					admin.AppendMember(member);
 				}
+				break;
 				case 3:
 				{
 					cout << "¬ведите пор€дковый номер записи:" << endl;
-					int number = GetNumber();
+					int number = GetNumber() - 1;
 					admin.DeleteMember(number);
 				}
+				break;
 				case 4:
 				{
 					cout << "¬ведите пор€дковый номер записи:" << endl;
-					int number = GetNumber();
+					int number = GetNumber() - 1;
 					admin.EditMember(number);
 				}
 				break;
@@ -306,7 +317,7 @@ void Menu::FirstMenu()
 		switch (menuChoose)
 		{
 		case 1:
-			RunUserMenu();
+			RunMemberMenu();
 			break;
 		case 2:
 			RunAdminMenu();

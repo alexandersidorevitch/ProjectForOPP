@@ -68,21 +68,25 @@ void User::PrintAsTable(vector<User>& users)
 void User::PrintAsTable(vector<User>& users, string verticalDelemitr, char gorizontalDelemitr)
 {
 	setlocale(0, "");
-	int maxLenghtLogin = 5, maxLenghtPassword = 6;
+	int maxLenghtLogin = 5, maxLenghtPassword = 6, maxLenghtIndex = __max(to_string(users.size()).length(), 5);
 	for (auto user : users) {
 		maxLenghtLogin = __max(user.Login.length(), maxLenghtLogin);
 		maxLenghtPassword = __max(user.Password.length(), maxLenghtPassword);
 	}
-	int totalLenght = maxLenghtLogin + maxLenghtPassword ;
-	string line(totalLenght + 5, gorizontalDelemitr);
+	int totalLenght = maxLenghtLogin + maxLenghtPassword + maxLenghtIndex;
+	string line(totalLenght + 7, gorizontalDelemitr);
 	cout << line << endl;
-	cout << '|' << setw(maxLenghtLogin) << "Логин" << verticalDelemitr
-		<< setw(maxLenghtPassword) << "Пароль" << '|';
-	cout << line << endl<<endl;
+	cout << '|' << setw(maxLenghtIndex) << "Номер" << verticalDelemitr
+		<< setw(maxLenghtLogin) << "Логин" << verticalDelemitr
+		<< setw(maxLenghtPassword) << "Пароль" << '|' << endl;
+	cout << line << endl;
+	int index = 1;
 	for (auto user : users) {
-		cout << '|' << setw(maxLenghtLogin) << user.Login << verticalDelemitr
-			<< setw(maxLenghtPassword) << user.Password << '|';
+		cout << '|' << setw(maxLenghtIndex) << index << verticalDelemitr
+			<< setw(maxLenghtLogin) << user.Login << verticalDelemitr
+			<< setw(maxLenghtPassword) << user.Password << '|' <<  endl;
 		cout << line << endl ;
+		index++;
 	}
 }
 
@@ -90,7 +94,7 @@ void User::PrintAsTable(vector<User>& users, string verticalDelemitr, char goriz
 ostream& operator<<(ostream& out, const User& user)
 {
 	out << user.GetLogin() << endl;
-	out << user.GetPassword() << endl;
+	out << user.GetPassword();
 	return out;
 }
 

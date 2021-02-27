@@ -5,7 +5,7 @@ using namespace std;
 class Menu
 {
 public:
-	static void RunUserMenu();
+	static void RunMemberMenu();
 	static void RunAdminMenu();
 	static void FirstMenu();
 	static int GetNumber();
