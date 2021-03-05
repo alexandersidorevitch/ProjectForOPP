@@ -1,12 +1,16 @@
 #include "Member.h"
 #include "FileWorker.h"
 #include "Menu.h"
-Member::Member()
+HostelResidents::HostelResidents()
 {
 }
-Member::Member(string name, string sex, Date date, string city, string phoneNumber, MusicalInstrument musicalInstrument, int placeByResult)
+HostelResidents::~HostelResidents()
 {
-	this->fullName = name;
+	
+}
+HostelResidents::HostelResidents(string name, string sex, Date date, string city, string phoneNumber, MusicalInstrument musicalInstrument, int placeByResult)
+{
+	this->full_name = name;
 	this->sex = sex;
 	this->date = date;
 	this->city = city;
@@ -15,45 +19,45 @@ Member::Member(string name, string sex, Date date, string city, string phoneNumb
 	this->phoneNumber = phoneNumber;
 }
 
-string Member::GetFullName()
+string HostelResidents::GetFullName()
 {
-	return fullName;
+	return full_name;
 }
 
-string Member::GetSex()
+string HostelResidents::GetSex()
 {
 	return sex;
 }
 
-Date Member::GetDate()
+Date HostelResidents::GetDate()
 {
 	return date;
 }
 
-string Member::GetCity()
+string HostelResidents::GetCity()
 {
 	return city;
 }
 
-string Member::GetPhoneNumber()
+string HostelResidents::GetPhoneNumber()
 {
 	return phoneNumber;
 }
 
-MusicalInstrument Member::GetMusicalInstrument()
+MusicalInstrument HostelResidents::GetMusicalInstrument()
 {
 	return musicalInstrument;
 }
 
-int Member::GetPlaceByResults()
+int HostelResidents::GetPlaceByResults()
 {
 	return placeByResult;
 }
 
-void Member::Input()
+void HostelResidents::Input()
 {
 	cout << "Введите ФИО" << endl;
-	getline(cin, fullName);
+	getline(cin, full_name);
 	cout << "Введите пол" << endl;
 	getline(cin, sex);
 	cout << "Введите дату в форме 01.01.2001" << endl;
@@ -68,12 +72,12 @@ void Member::Input()
 	placeByResult = Menu::GetNumber();
 }
 
-void Member::Append(vector<Member>& members, Member member)
+void HostelResidents::append(vector<HostelResidents>& members, HostelResidents member)
 {
 	members.push_back(member);
 }
 
-void Member::Remove(vector<Member>& members, int index)
+void HostelResidents::Remove(vector<HostelResidents>& members, int index)
 {
 	if (index < 0 || index >= members.size())
 	{
@@ -85,7 +89,7 @@ void Member::Remove(vector<Member>& members, int index)
 	}
 }
 
-void Member::Edit(vector<Member>& members, int index)
+void HostelResidents::Edit(vector<HostelResidents>& members, int index)
 {
 	if (index < 0 || index >= members.size())
 	{
@@ -97,18 +101,18 @@ void Member::Edit(vector<Member>& members, int index)
 
 }
 
-void Member::PrintAsTable(vector<Member>& members)
+void HostelResidents::print_as_table(vector<HostelResidents>& members)
 {
-	PrintAsTable(members, " | ", '*');
+	print_as_table(members, " | ", '*');
 }
 
-void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char gorizontalDelemitr)
+void HostelResidents::print_as_table(vector<HostelResidents>& members, string verticalDelemitr, char gorizontalDelemitr)
 {
 	setlocale(0, "");
 	int maxLenghtFullName = 6, maxLenghtSex = 3, maxLenghtDate = 4,
 		maxLenghtCity = 5, maxLenghtInstrumentName = 16, maxLenghtPhoneNumber = 14, maxLenghtPlace = 5, maxLenghtIndex = __max(to_string(members.size()).length(), 5);
 	for (auto member : members) {
-		maxLenghtFullName = __max(member.fullName.length(), maxLenghtFullName);
+		maxLenghtFullName = __max(member.full_name.length(), maxLenghtFullName);
 		maxLenghtSex = __max(member.sex.length(), maxLenghtSex);
 		maxLenghtDate = __max(member.date.ToString().length(), maxLenghtDate);
 		maxLenghtCity = __max(member.city.length(), maxLenghtCity);
@@ -132,7 +136,7 @@ void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char
 	cout << line << endl << endl;
 	int index = 1;
 	for (auto member : members) {
-		cout << '|' << setw(maxLenghtIndex) << index << verticalDelemitr << setw(maxLenghtFullName) << member.fullName << verticalDelemitr
+		cout << '|' << setw(maxLenghtIndex) << index << verticalDelemitr << setw(maxLenghtFullName) << member.full_name << verticalDelemitr
 			<< setw(maxLenghtSex) << member.sex << verticalDelemitr
 			<< setw(maxLenghtDate) << member.date << verticalDelemitr
 			<< setw(maxLenghtCity) << member.city << verticalDelemitr
@@ -144,7 +148,7 @@ void Member::PrintAsTable(vector<Member>& members, string verticalDelemitr, char
 	}
 }
 
-void Member::SortByFunc(vector<Member>& members, bool (*comp)(Member, Member))
+void HostelResidents::SortByFunc(vector<HostelResidents>& members, bool (*comp)(HostelResidents, HostelResidents))
 {
 	//[](Member memberFirst, Member memberSecond) {return memberFirst.GetMusicalInstrument().GetName() < memberSecond.GetMusicalInstrument().GetName(); } //Компоратор для сортировки по инструментам
 	//[](Member memberFirst, Member memberSecond) {return memberFirst.GetFullName() < memberSecond.GetFullName(); } //Компоратор для сортировки по алфавиту
@@ -153,10 +157,10 @@ void Member::SortByFunc(vector<Member>& members, bool (*comp)(Member, Member))
 	sort(members.begin(), members.end(), comp);
 }
 
-void Member::PrintYougestWinner(vector<Member>& members)
+void HostelResidents::PrintYougestWinner(vector<HostelResidents>& members)
 {
 
-	vector<Member> WinnersBeforTwelve;
+	vector<HostelResidents> WinnersBeforTwelve;
 	for (auto member : members)
 	{
 		if (member.placeByResult <= 3 and member.date.getDifferenceInDays(Date(24, 2, 2020)) / 365 >= -12)
@@ -170,12 +174,12 @@ void Member::PrintYougestWinner(vector<Member>& members)
 	}
 	else
 	{
-		Member::SortByFunc(WinnersBeforTwelve, [](Member memberFirst, Member memberSecond) {return memberFirst.GetDate() > memberSecond.GetDate(); });
-		Member::PrintAsTable(WinnersBeforTwelve);
+		HostelResidents::SortByFunc(WinnersBeforTwelve, [](HostelResidents memberFirst, HostelResidents memberSecond) {return memberFirst.GetDate() > memberSecond.GetDate(); });
+		HostelResidents::print_as_table(WinnersBeforTwelve);
 	}
 }
 
-void Member::PrintFirstThreePlaceFrommAllInstrument(vector<Member>& members)
+void HostelResidents::PrintFirstThreePlaceFrommAllInstrument(vector<HostelResidents>& members)
 {
 	vector<string> NamesOfInstrumaent;
 	for (int i = 0; i < members.size(); i++)
@@ -183,7 +187,7 @@ void Member::PrintFirstThreePlaceFrommAllInstrument(vector<Member>& members)
 		if (find(NamesOfInstrumaent.begin(), NamesOfInstrumaent.end(), members[i].musicalInstrument.GetName()) == NamesOfInstrumaent.end())
 		{
 			NamesOfInstrumaent.push_back(members[i].musicalInstrument.GetName());
-			vector<Member> WinnersByInstruments;
+			vector<HostelResidents> WinnersByInstruments;
 			for (int j = i; j < members.size(); j++)
 			{
 				if (members[i].musicalInstrument.GetName() == members[j].musicalInstrument.GetName())
@@ -191,22 +195,22 @@ void Member::PrintFirstThreePlaceFrommAllInstrument(vector<Member>& members)
 					WinnersByInstruments.push_back(members[j]);
 				}
 			}
-			Member::SortByFunc(WinnersByInstruments, [](Member memberFirst, Member memberSecond) {return memberFirst.GetPlaceByResults() < memberSecond.GetPlaceByResults(); });
+			HostelResidents::SortByFunc(WinnersByInstruments, [](HostelResidents memberFirst, HostelResidents memberSecond) {return memberFirst.GetPlaceByResults() < memberSecond.GetPlaceByResults(); });
 			if (WinnersByInstruments.size() > 3)
 				WinnersByInstruments.erase(WinnersByInstruments.begin() + 3, WinnersByInstruments.end());
 			cout << "Инструмент: " << members[i].musicalInstrument.GetName() << endl;
-			Member::PrintAsTable(WinnersByInstruments);
+			HostelResidents::print_as_table(WinnersByInstruments);
 		}
 	}
 
 }
 
-void Member::FindByFIO(vector<Member>& members, string NameToFind)
+void HostelResidents::FindByFIO(vector<HostelResidents>& members, string NameToFind)
 {
-	vector<Member> FoundByNameMembers;
+	vector<HostelResidents> FoundByNameMembers;
 	for (auto member : members)
 	{
-		if (FindSubstring(member.fullName, NameToFind))
+		if (FindSubstring(member.full_name, NameToFind))
 			FoundByNameMembers.push_back(member);
 	}
 	if (FoundByNameMembers.size() == 0)
@@ -215,13 +219,13 @@ void Member::FindByFIO(vector<Member>& members, string NameToFind)
 	}
 	else
 	{
-		Member::SortByFunc(FoundByNameMembers, [](Member memberFirst, Member memberSecond) {return memberFirst.GetFullName() < memberSecond.GetFullName(); });
-		Member::PrintAsTable(FoundByNameMembers);
+		HostelResidents::SortByFunc(FoundByNameMembers, [](HostelResidents memberFirst, HostelResidents memberSecond) {return memberFirst.GetFullName() < memberSecond.GetFullName(); });
+		HostelResidents::print_as_table(FoundByNameMembers);
 	}
 
 }
 
-bool Member::FindSubstring(string mainString, string subString)
+bool HostelResidents::FindSubstring(string mainString, string subString)
 {
 	int size;
 	if (mainString.size() > subString.size())
@@ -240,9 +244,9 @@ bool Member::FindSubstring(string mainString, string subString)
 
 
 
-ostream& operator<<(ostream& out, const Member& member)
+ostream& operator<<(ostream& out, const HostelResidents& member)
 {
-	out << member.fullName << endl;
+	out << member.full_name << endl;
 	out << member.sex << endl;
 	out << member.date << endl;
 	out << member.city << endl;
@@ -252,10 +256,10 @@ ostream& operator<<(ostream& out, const Member& member)
 	return out;
 }
 
-istream& operator>>(istream& in, Member& member)
+istream& operator>>(istream& in, HostelResidents& member)
 {
 	string placeByResultStr;
-	getline(in, member.fullName);
+	getline(in, member.full_name);
 	getline(in, member.sex);
 	in >> member.date;
 	getline(in, member.city);

@@ -17,7 +17,7 @@ void Menu::RunMemberMenu()
 	getline(cin, userFileName);
 	memberFileName = memberFileName.empty() ? "members.txt" : memberFileName;
 	
-	vector<Member> members = FileWorker::GetMembersFromFile(memberFileName);
+	vector<HostelResidents> members = FileWorker::get_members_from_file(memberFileName);
 	bool exitMenu = true;
 	while (exitMenu)
 	{
@@ -34,7 +34,7 @@ void Menu::RunMemberMenu()
 		{
 		case 1:
 		{
-			Member::PrintAsTable(members);
+			HostelResidents::print_as_table(members);
 		}
 		break;
 		case 2:
@@ -42,7 +42,7 @@ void Menu::RunMemberMenu()
 			cout << "Введите имя для поиска: " << endl;
 			string name;
 			getline(cin, name);
-			Member::FindByFIO(members, name);
+			HostelResidents::FindByFIO(members, name);
 		}
 		break;
 		case 3:
@@ -62,18 +62,18 @@ void Menu::RunMemberMenu()
 				{
 				case 1:
 					cout << "Отсоритрованно по имени;" << endl;
-					Member::SortByFunc(members, [](Member memberFirst, Member memberSecond) {return memberFirst.GetFullName() < memberSecond.GetFullName(); });
-					Member::PrintAsTable(members);
+					HostelResidents::SortByFunc(members, [](HostelResidents memberFirst, HostelResidents memberSecond) {return memberFirst.GetFullName() < memberSecond.GetFullName(); });
+					HostelResidents::print_as_table(members);
 					break;
 				case 2:
 					cout << "Отсоритрованно по месту;" << endl;
-					Member::SortByFunc(members, [](Member memberFirst, Member memberSecond) {return memberFirst.GetPlaceByResults() < memberSecond.GetPlaceByResults(); });
-					Member::PrintAsTable(members);
+					HostelResidents::SortByFunc(members, [](HostelResidents memberFirst, HostelResidents memberSecond) {return memberFirst.GetPlaceByResults() < memberSecond.GetPlaceByResults(); });
+					HostelResidents::print_as_table(members);
 					break;
 				case 3:
 					cout << "Отсоритрованно по дате рождения;" << endl;
-					Member::SortByFunc(members, [](Member memberFirst, Member memberSecond) {return memberFirst.GetDate() < memberSecond.GetDate(); });
-					Member::PrintAsTable(members);
+					HostelResidents::SortByFunc(members, [](HostelResidents memberFirst, HostelResidents memberSecond) {return memberFirst.GetDate() < memberSecond.GetDate(); });
+					HostelResidents::print_as_table(members);
 					break;
 				case 4:
 					exitSubMenu = false;
@@ -89,13 +89,13 @@ void Menu::RunMemberMenu()
 		case 4:
 		{
 			cout << "Первое индивидуальное задание:" << endl << endl;
-			Member::PrintFirstThreePlaceFrommAllInstrument(members);
+			HostelResidents::PrintFirstThreePlaceFrommAllInstrument(members);
 		}
 		break;
 		case 5:
 		{
 			cout << "Второе индивидуальное задание:" << endl << endl;
-			Member::PrintYougestWinner(members);
+			HostelResidents::PrintYougestWinner(members);
 		}
 		break;
 		case 6:
@@ -152,7 +152,7 @@ void Menu::RunAdminMenu()
 				{
 				case 1:
 				{
-					admin.ViewUsers();
+					admin.view_users();
 				}
 				break;
 				case 2:
@@ -166,14 +166,14 @@ void Menu::RunAdminMenu()
 				{
 					cout << "Введите порядковый номер пользователя:" << endl;
 					int number = GetNumber() - 1;
-					admin.EditUser(number);
+					admin.edit_user(number);
 				}
 				break;
 				case 4:
 				{
 					cout << "Введите порядковый номер пользователя:" << endl;
 					int number = GetNumber() - 1;
-					admin.DeleteUser(number);
+					admin.delete_user(number);
 				}
 				break;
 				case 5:
@@ -207,7 +207,7 @@ void Menu::RunAdminMenu()
 					cout << "Введите имя файла:" << endl;
 					string fileName;
 					getline(cin, fileName);
-					admin.CreateFile(fileName);
+					admin.create_file(fileName);
 				}
 				break;
 				case 2:
@@ -215,7 +215,7 @@ void Menu::RunAdminMenu()
 					cout << "Введите имя файла:" << endl;
 					string fileName;
 					getline(cin, fileName);
-					admin.OpenFile(fileName);
+					admin.open_file(fileName);
 				}
 				break;
 				case 3:
@@ -223,7 +223,7 @@ void Menu::RunAdminMenu()
 					cout << "Введите имя файла:" << endl;
 					string fileName;
 					getline(cin, fileName);
-					admin.RemoveFile(fileName);
+					admin.remove_file(fileName);
 				}
 				break;
 				case 4:
@@ -255,28 +255,28 @@ void Menu::RunAdminMenu()
 				{
 				case 1:
 				{
-					admin.ViewMembers();
+					admin.view_members();
 				}
 				break;
 				case 2:
 				{
-					Member member;
+					HostelResidents member;
 					member.Input();
-					admin.AppendMember(member);
+					admin.append_member(member);
 				}
 				break;
 				case 3:
 				{
 					cout << "Введите порядковый номер записи:" << endl;
 					int number = GetNumber() - 1;
-					admin.DeleteMember(number);
+					admin.delete_member(number);
 				}
 				break;
 				case 4:
 				{
 					cout << "Введите порядковый номер записи:" << endl;
 					int number = GetNumber() - 1;
-					admin.EditMember(number);
+					admin.edit_member(number);
 				}
 				break;
 				case 5:

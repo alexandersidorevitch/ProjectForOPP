@@ -12,12 +12,12 @@ Administrator::Administrator(string userFileName, string memberFileName)
 	//file_in.open(userFileName);
 	users = FileWorker::GetUsersFromFile(userFileName);
 
-	members = FileWorker::GetMembersFromFile(memberFileName);
+	members = FileWorker::get_members_from_file(memberFileName);
 
 }
-void Administrator::CreateFile(string fileName)
+void Administrator::create_file(string fileName)
 {
-	if (FileWorker::IsExists(fileName))
+	if (FileWorker::is_exists(fileName))
 	{
 		cout << "Файл уже существует" << endl;
 	}
@@ -28,14 +28,14 @@ void Administrator::CreateFile(string fileName)
 		cout << "Файл создан" << endl;
 	}
 }
-void Administrator::OpenFile(string fileName)
+void Administrator::open_file(string fileName)
 {
-	members = FileWorker::GetMembersFromFile(fileName);
+	members = FileWorker::get_members_from_file(fileName);
 	cout << "Файл открыт" << endl;
 }
-void Administrator::RemoveFile(string fileName)
+void Administrator::remove_file(string fileName)
 {
-	if (not FileWorker::IsExists(fileName))
+	if (not FileWorker::is_exists(fileName))
 	{
 		cout << "Такого файла нет" << endl;
 	}
@@ -52,33 +52,33 @@ void Administrator::RemoveFile(string fileName)
 	}
 }
 
-void Administrator::ViewMembers()
+void Administrator::view_members()
 {
-	Member::PrintAsTable(members);
+	HostelResidents::print_as_table(members);
 }
 
-void Administrator::AppendMember(Member member)
+void Administrator::append_member(HostelResidents member)
 {
 
-	Member::Append(members, member);
-	FileWorker::WriteMembersToFile(memberFileName, members);
-
-}
-
-void Administrator::DeleteMember(int index)
-{
-
-	Member::Remove(members, index);
-	FileWorker::WriteMembersToFile(memberFileName, members);
-
+	HostelResidents::append(members, member);
+	FileWorker::write_members_to_file(memberFileName, members);
 
 }
 
-void Administrator::EditMember(int index)
+void Administrator::delete_member(int index)
 {
 
-	Member::Edit(members, index);
-	FileWorker::WriteMembersToFile(memberFileName, members);
+	HostelResidents::Remove(members, index);
+	FileWorker::write_members_to_file(memberFileName, members);
+
+
+}
+
+void Administrator::edit_member(int index)
+{
+
+	HostelResidents::Edit(members, index);
+	FileWorker::write_members_to_file(memberFileName, members);
 
 
 }
@@ -90,21 +90,21 @@ void Administrator::AppendUser(User user)
 	FileWorker::WriteUsersToFile(userFileName, users);
 }
 
-void Administrator::DeleteUser(int index)
+void Administrator::delete_user(int index)
 {
 
 	User::Remove(users, index);
 	FileWorker::WriteUsersToFile(userFileName, users);
 }
 
-void Administrator::EditUser(int index)
+void Administrator::edit_user(int index)
 {
 
 	User::Edit(users, index);
 	FileWorker::WriteUsersToFile(userFileName, users);
 }
 
-void Administrator::ViewUsers()
+void Administrator::view_users()
 {
 	User::PrintAsTable(users);
 }

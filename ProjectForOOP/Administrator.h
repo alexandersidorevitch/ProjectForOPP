@@ -14,20 +14,20 @@ class Administrator
 public:
 	Administrator();
 	Administrator(string userFileName, string memberFileName);
-	void CreateFile(string fileName);
-	void OpenFile(string fileName);
-	void RemoveFile(string fileName);
-	void ViewMembers();
-	void AppendMember(Member member);
-	void DeleteMember(int index);
-	void EditMember(int index);
+	void create_file(string fileName);
+	void open_file(string fileName);
+	void remove_file(string fileName);
+	void view_members();
+	void append_member(HostelResidents member);
+	void delete_member(int index);
+	void edit_member(int index);
 	void AppendUser(User member);
-	void DeleteUser(int index);
-	void EditUser(int index);
-	void ViewUsers();
+	void delete_user(int index);
+	void edit_user(int index);
+	void view_users();
 private:
 	
-	vector<Member> members;
+	vector<HostelResidents> members;
 	vector<User> users;
 	string memberFileName;
 	string userFileName;
